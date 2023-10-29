@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  width: 14em;
+  margin: 1em;
+  background-color: rgba(132, 132, 132, 0.2);
+  border-radius: 1em;
+}
+
+.card-image {
+  width: 15em;
+  height: 15em;
+  border-radius: 5px;
+}
