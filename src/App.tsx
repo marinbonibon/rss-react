@@ -4,16 +4,19 @@ import React, { ReactNode } from 'react';
 import Result from './result/Result';
 import { Card } from './types/card';
 import ErrorBoundary from './errorBoundary/ErrorBoundary';
+import Loader from './loader/Loader';
 
 type MyProps = undefined;
 type MyState = {
   results: Card[];
+  isLoading: boolean;
 };
 
 class App extends React.Component<MyProps, MyState> {
   baseUrl = 'https://rickandmortyapi.com/api/character/?page=1';
   state = {
     results: [],
+    isLoading: false,
   };
 
   componentDidMount(): void {
@@ -25,33 +28,37 @@ class App extends React.Component<MyProps, MyState> {
   handleResultChange = (results: Card[]): void => {
     this.setState({
       results,
+      isLoading: false,
     });
   };
 
   fetchData = (url: string): void => {
+    this.setState((prevState) => ({
+      ...prevState,
+      isLoading: true,
+    }));
     fetch(url)
       .then((res: Response) => {
         return res.json();
       })
       .then((responseData) => {
-        console.log('responseData.results', responseData.results);
         this.handleResultChange(responseData.results);
       });
   };
 
   filterResults = (name: string): void => {
     const url = `${this.baseUrl}&name=${name}`;
-    console.log('url', url);
     this.fetchData(url);
   };
 
   render(): ReactNode {
-    const { results } = this.state;
+    const { results, isLoading } = this.state;
     return (
       <ErrorBoundary>
         <>
           <Search onClick={this.filterResults} />
           <Result results={results} />
+          {isLoading && <Loader />}
         </>
       </ErrorBoundary>
     );
