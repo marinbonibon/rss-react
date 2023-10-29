@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react';
+import './Search.css';
 
 type MyProps = {
   onClick: (string) => void;
@@ -33,8 +34,9 @@ class Search extends React.Component<MyProps, MyState> {
 
   render() {
     return (
-      <div>
+      <section className="search-section">
         <input
+          className="search-input"
           type="text"
           value={this.state.name}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -43,7 +45,7 @@ class Search extends React.Component<MyProps, MyState> {
           placeholder="enter the name"
         />
         <button onClick={this.handleOnClick}>Search</button>
-      </div>
+      </section>
     );
   }
 }

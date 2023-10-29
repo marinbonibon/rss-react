@@ -10,14 +10,16 @@ type MyState = undefined;
 class Result extends React.Component<MyProps, MyState> {
   render() {
     return (
-      <div className="wrapper">
+      <section className="wrapper">
         {this.props.results.map((el: Card) => (
-          <div key={el.id}>
-            <img src={el.image} alt={el.name} />
-            <p>{el.name}</p>
+          <div key={el.id} className="card">
+            <img className="card-image" src={el.image} alt={el.name} />
+            <p>Name: {el.name}</p>
+            <p>Status: {el.status}</p>
+            <p>Species: {el.species}</p>
           </div>
         ))}
-      </div>
+      </section>
     );
   }
 }

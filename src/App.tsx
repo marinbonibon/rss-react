@@ -31,6 +31,7 @@ class App extends React.Component<MyProps, MyState> {
         return res.json();
       })
       .then((responseData) => {
+        console.log('responseData.results', responseData.results);
         this.handleResultChange(responseData.results);
       });
   };
