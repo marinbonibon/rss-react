@@ -1,25 +1,19 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, ReactNode } from 'react';
 import './Search.css';
+import ErrorButton from '../errorButton/ErrorButton';
 
 type MyProps = {
   onClick: (string) => void;
 };
 type MyState = {
-  name: string;
+  name: string | null;
 };
 
 class Search extends React.Component<MyProps, MyState> {
+  searchTerm = localStorage.getItem('searchTerm');
   state = {
-    name: '',
+    name: this.searchTerm ? this.searchTerm : '',
   };
-
-  componentDidMount() {
-    const searchTerm = localStorage.getItem('searchTerm');
-    searchTerm &&
-      this.setState({
-        name: searchTerm,
-      });
-  }
 
   handleInputChange = (name: string): void => {
     this.setState({
@@ -32,19 +26,21 @@ class Search extends React.Component<MyProps, MyState> {
     this.props.onClick(this.state.name);
   };
 
-  render() {
+  render(): ReactNode {
+    const { name } = this.state;
     return (
       <section className="search-section">
         <input
           className="search-input"
           type="text"
-          value={this.state.name}
+          value={name}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             this.handleInputChange(e.target.value)
           }
           placeholder="enter the name"
         />
         <button onClick={this.handleOnClick}>Search</button>
+        <ErrorButton text="Error" />
       </section>
     );
   }

@@ -1,8 +1,9 @@
 import './App.css';
 import Search from './search/Search';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Result from './result/Result';
 import { Card } from './types/card';
+import ErrorBoundary from './errorBoundary/ErrorBoundary';
 
 type MyProps = undefined;
 type MyState = {
@@ -15,8 +16,10 @@ class App extends React.Component<MyProps, MyState> {
     results: [],
   };
 
-  componentDidMount() {
-    this.filterResults('');
+  componentDidMount(): void {
+    const searchTerm = localStorage.getItem('searchTerm');
+    const name = searchTerm ? searchTerm : '';
+    this.filterResults(name);
   }
 
   handleResultChange = (results: Card[]): void => {
@@ -38,15 +41,19 @@ class App extends React.Component<MyProps, MyState> {
 
   filterResults = (name: string): void => {
     const url = `${this.baseUrl}&name=${name}`;
+    console.log('url', url);
     this.fetchData(url);
   };
 
-  render() {
+  render(): ReactNode {
+    const { results } = this.state;
     return (
-      <>
-        <Search onClick={this.filterResults} />
-        <Result results={this.state.results} />
-      </>
+      <ErrorBoundary>
+        <>
+          <Search onClick={this.filterResults} />
+          <Result results={results} />
+        </>
+      </ErrorBoundary>
     );
   }
 }

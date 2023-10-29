@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import './Result.css';
 import { Card } from '../types/card';
 
@@ -8,10 +8,11 @@ type MyProps = {
 type MyState = undefined;
 
 class Result extends React.Component<MyProps, MyState> {
-  render() {
+  render(): ReactNode {
+    const { results } = this.props;
     return (
       <section className="wrapper">
-        {this.props.results.map((el: Card) => (
+        {results.map((el: Card) => (
           <div key={el.id} className="card">
             <img className="card-image" src={el.image} alt={el.name} />
             <p>Name: {el.name}</p>
