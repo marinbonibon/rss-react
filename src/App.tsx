@@ -6,13 +6,12 @@ import { Card } from './types/card';
 import ErrorBoundary from './errorBoundary/ErrorBoundary';
 import Loader from './loader/Loader';
 
-type MyProps = undefined;
 type MyState = {
   results: Card[];
   isLoading: boolean;
 };
 
-class App extends React.Component<MyProps, MyState> {
+class App extends React.Component<object, MyState> {
   baseUrl = 'https://rickandmortyapi.com/api/character/?page=1';
   state = {
     results: [],

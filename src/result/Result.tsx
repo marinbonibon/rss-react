@@ -2,12 +2,11 @@ import React, { ReactNode } from 'react';
 import './Result.css';
 import { Card } from '../types/card';
 
-type MyProps = {
+interface MyProps {
   results: Card[];
-};
-type MyState = undefined;
+}
 
-class Result extends React.Component<MyProps, MyState> {
+class Result extends React.Component<MyProps, object> {
   render(): ReactNode {
     const { results } = this.props;
     return (

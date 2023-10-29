@@ -1,10 +1,7 @@
 import React, { ReactNode } from 'react';
 import './Loader.css';
 
-type MyProps = undefined;
-type MyState = undefined;
-
-class Loader extends React.Component<MyProps, MyState> {
+class Loader extends React.Component<object, object> {
   render(): ReactNode {
     return (
       <div className="loader">

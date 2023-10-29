@@ -3,7 +3,7 @@ import './Search.css';
 import ErrorButton from '../errorButton/ErrorButton';
 
 type MyProps = {
-  onClick: (string) => void;
+  onClick: (arg: string) => void;
 };
 type MyState = {
   name: string | null;
