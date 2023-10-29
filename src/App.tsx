@@ -16,8 +16,7 @@ class App extends React.Component<MyProps, MyState> {
   };
 
   componentDidMount() {
-    const url = `${this.baseUrl}`;
-    this.fetchData(url);
+    this.filterResults('');
   }
 
   handleResultChange = (results: Card[]): void => {
@@ -32,7 +31,6 @@ class App extends React.Component<MyProps, MyState> {
         return res.json();
       })
       .then((responseData) => {
-        console.log('responseData', responseData);
         this.handleResultChange(responseData.results);
       });
   };

@@ -12,6 +12,14 @@ class Search extends React.Component<MyProps, MyState> {
     name: '',
   };
 
+  componentDidMount() {
+    const searchTerm = localStorage.getItem('searchTerm');
+    searchTerm &&
+      this.setState({
+        name: searchTerm,
+      });
+  }
+
   handleInputChange = (name: string): void => {
     this.setState({
       name,
@@ -19,6 +27,7 @@ class Search extends React.Component<MyProps, MyState> {
   };
 
   handleOnClick = (): void => {
+    localStorage.setItem('searchTerm', this.state.name);
     this.props.onClick(this.state.name);
   };
 
